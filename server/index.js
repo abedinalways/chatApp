@@ -13,9 +13,10 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
   console.log(`user is connected with the id: ${socket.id}`);
-  // socket.on('message', (data) => {
-  //   console.log(data)
-  // })
+  socket.on('send_message', (msg) => {
+    console.log(msg);
+  socket.broadcast.emit("receive-message", msg)
+  })
 })
 server.listen(3001, () => {
   console.log('server is running on port 3001')
